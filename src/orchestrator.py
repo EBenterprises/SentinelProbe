@@ -36,3 +36,13 @@ class TitanOrchestrator:
 if __name__ == "__main__":
     orchestrator = TitanOrchestrator()
     orchestrator.run_deployment()
+
+    def process_nexus_affiliate(self, user_id, commission):
+        entry = f"AFFILIATE_PAYMENT | User: {user_id} | Amount: {commission}"
+        self.update_ledger(entry)
+        logging.info(f"Nexus Engine: Processed {entry}")
+
+    def broadcast_gossip(self, node_id, status):
+        message = f"NODE_STATUS | ID: {node_id} | State: {status}"
+        self.sync_gossip(message)
+        logging.info(f"Gossip Protocol: Broadcast {message}")
