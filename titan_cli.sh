@@ -1,5 +1,5 @@
 #!/bin/bash
-# Titan-OS CLI Controller: Full Monolith Suite v2.0
+# Titan-OS CLI Controller: Full Monolith Suite v3.0
 case "$1" in
     "affiliate") python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.process_nexus_affiliate('$2', '$3')" ;;
     "asset")     python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.manage_asset('$2', '$3')" ;;
@@ -16,5 +16,8 @@ case "$1" in
     "cleanup")   python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.purge_temp_files()" ;;
     "alert")     python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.send_alert('$2', '$3')" ;;
     "sync")      python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.sync_repository('$2')" ;;
-    *) echo "Usage: ./titan_cli.sh [affiliate|asset|identity|cash|check|balance|egg|webhook|archive|audit|telemetry|deploy|cleanup|alert|sync]" ;;
+    "report")    python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.generate_report('$2')" ;;
+    "encrypt")   python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.process_encrypted_payload('$2', '$3')" ;;
+    "schedule")  python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.schedule_batch_job('$2', '$3')" ;;
+    *) echo "Usage: ./titan_cli.sh [affiliate|asset|identity|cash|check|balance|egg|webhook|archive|audit|telemetry|deploy|cleanup|alert|sync|report|encrypt|schedule]" ;;
 esac
