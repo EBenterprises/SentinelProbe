@@ -1,0 +1,11 @@
+{
+    "fabric_version": "2.0.0-RC1",
+    "capabilities": [
+        "cognitive_load_balancing",
+        "heuristic_anomaly_detection",
+        "realtime_telemetry",
+        "p2p_gossip_consensus"
+    ],
+    "auto_scaling": true,
+    "security_level": "MAXIMUM"
+}
