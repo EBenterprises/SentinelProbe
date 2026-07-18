@@ -1,5 +1,5 @@
 #!/bin/bash
-# Titan-OS CLI Controller: Extended Module Support
+# Titan-OS CLI Controller: Full Monolith Integration
 case "$1" in
     "affiliate") python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.process_nexus_affiliate('$2', '$3')" ;;
     "asset")     python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.manage_asset('$2', '$3')" ;;
@@ -8,5 +8,7 @@ case "$1" in
     "check")     python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.perform_integrity_check()" ;;
     "balance")   python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.rebalance_network('$2')" ;;
     "egg")       python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.log_egg_find('$2', '$3')" ;;
-    *) echo "Titan-OS CLI: [affiliate|asset|identity|cash|check|balance|egg]" ;;
+    "webhook")   python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.trigger_webhook('$2', '$3')" ;;
+    "archive")   python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.archive_ledger('$2')" ;;
+    *) echo "Usage: ./titan_cli.sh [affiliate|asset|identity|cash|check|balance|egg|webhook|archive]" ;;
 esac

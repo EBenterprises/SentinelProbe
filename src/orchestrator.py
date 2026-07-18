@@ -100,3 +100,20 @@ if __name__ == "__main__":
         self.update_ledger(entry)
         self.update_dashboard(f"New egg location logged: {location}")
         logging.info(f"Egg Finder: {entry}")
+
+    # Module: Webhook Listener (Stub for asynchronous triggers)
+    def trigger_webhook(self, endpoint, payload):
+        entry = f"WEBHOOK | Target: {endpoint} | Payload: {payload}"
+        self.update_ledger(entry)
+        self.update_dashboard(f"Webhook triggered: {endpoint}")
+        logging.info(f"Webhook: {entry}")
+
+    # Module: Ledger Archival Process
+    def archive_ledger(self, archive_name):
+        archive_path = f"{LOG_DIR}/archive"
+        os.makedirs(archive_path, exist_ok=True)
+        import shutil
+        shutil.copy(self.ledger_file, f"{archive_path}/{archive_name}.log")
+        with open(self.ledger_file, "w") as f: f.write("") # Clear active ledger
+        self.update_dashboard(f"Ledger archived as {archive_name}")
+        logging.info(f"Archival: Ledger moved to {archive_name}")
