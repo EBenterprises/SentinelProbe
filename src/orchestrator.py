@@ -139,3 +139,30 @@ if __name__ == "__main__":
         self.update_ledger(entry)
         self.update_dashboard("Live deployment sequence initiated")
         logging.info("Deployment: Full-stack push started.")
+
+    # Module: Cache/Temporary File Cleanup
+    def purge_temp_files(self):
+        count = 0
+        for root, dirs, files in os.walk(LOG_DIR):
+            for file in files:
+                if file.endswith(".tmp"):
+                    os.remove(os.path.join(root, file))
+                    count += 1
+        self.update_dashboard(f"Cleanup completed: {count} temp files removed")
+        logging.info(f"System Maintenance: {count} files purged.")
+
+    # Module: System Alert Notification
+    def send_alert(self, severity, message):
+        entry = f"ALERT | Severity: {severity} | Msg: {message}"
+        self.update_ledger(entry)
+        self.update_dashboard(f"CRITICAL ALERT: {message}")
+        logging.info(f"Notification: {entry}")
+
+    # Module: Repository Sync (GitHub/Remote Integration)
+    def sync_repository(self, remote_name):
+        import subprocess
+        result = subprocess.run(["git", "pull", remote_name, "main"], capture_output=True)
+        status = "SUCCESS" if result.returncode == 0 else "FAILED"
+        self.update_ledger(f"REPO_SYNC | Remote: {remote_name} | Status: {status}")
+        self.update_dashboard(f"Repo sync to {remote_name} finished: {status}")
+        logging.info(f"Repo Management: {status}")
