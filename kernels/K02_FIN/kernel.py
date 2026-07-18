@@ -1,5 +1,7 @@
 import sys
-def execute(cmd, data):
-    return f"[{K}] PROCESSED: {cmd} | DATA: {data}"
+class Kernel:
+    def __init__(self, name): self.name = name
+    def run(self, op, val): return f"[{self.name}] OP: {op} | VAL: {val}"
 if __name__ == "__main__":
-    print(execute(sys.argv[1], sys.argv[2]))
+    k = Kernel("K02_FIN")
+    print(k.run(sys.argv[1], sys.argv[2]))

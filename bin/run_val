@@ -1,0 +1,2 @@
+#!/bin/bash
+python3 "/data/data/com.termux/files/home/sentinel_probe/kernels/K13_VAL/kernel.py" "$1" "$2"
