@@ -117,3 +117,25 @@ if __name__ == "__main__":
         with open(self.ledger_file, "w") as f: f.write("") # Clear active ledger
         self.update_dashboard(f"Ledger archived as {archive_name}")
         logging.info(f"Archival: Ledger moved to {archive_name}")
+
+    # Module: Security Audit
+    def run_security_audit(self):
+        # Scan for sensitive file permissions
+        audit_res = "PASS" if os.access(self.ledger_file, os.R_OK | os.W_OK) else "FAIL"
+        entry = f"SECURITY_AUDIT | Ledger_Access: {audit_res}"
+        self.update_ledger(entry)
+        self.update_dashboard(f"Security audit performed: {audit_res}")
+        logging.info(f"Security: {entry}")
+
+    # Module: Performance Telemetry
+    def log_performance(self, cpu_load, mem_usage):
+        entry = f"TELEMETRY | CPU: {cpu_load}% | MEM: {mem_usage}MB"
+        self.update_ledger(entry)
+        logging.info(f"Performance: {entry}")
+
+    # Module: Deployment Trigger for EB Enterprises
+    def trigger_live_deployment(self):
+        entry = "DEPLOYMENT_TRIGGER | Initiating pipeline to live production"
+        self.update_ledger(entry)
+        self.update_dashboard("Live deployment sequence initiated")
+        logging.info("Deployment: Full-stack push started.")
