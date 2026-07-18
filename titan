@@ -1,0 +1,3 @@
+#!/bin/bash
+# Neural-Mesh Entry Point
+python3 "$BASE_DIR/kinetic_engine.py" "$1" "$2"
