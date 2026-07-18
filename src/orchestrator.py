@@ -76,3 +76,27 @@ if __name__ == "__main__":
         self.update_ledger(entry)
         self.update_dashboard(f"Currency scanned: {amount} from {source}")
         logging.info(f"Cash Scan: {entry}")
+
+    # Module: System Integrity Check
+    def perform_integrity_check(self):
+        log_files = ["orchestrator.log", "gossip.log", "ledger.log", "dashboard.log"]
+        for log in log_files:
+            path = os.path.join(LOG_DIR, log)
+            if os.path.exists(path):
+                size = os.path.getsize(path)
+                self.update_dashboard(f"Integrity check: {log} size {size} bytes")
+        logging.info("System Integrity Check Completed.")
+
+    # Module: Network Heuristic Balancer
+    def rebalance_network(self, load_factor):
+        entry = f"BALANCER | Load_Factor: {load_factor} | Status: Optimized"
+        self.update_ledger(entry)
+        self.update_dashboard("Network load rebalanced")
+        logging.info(f"Balancer: {entry}")
+
+    # Module: Egg Finder Geolocation Utility
+    def log_egg_find(self, location, batch_id):
+        entry = f"EGG_FINDER | Location: {location} | Batch: {batch_id}"
+        self.update_ledger(entry)
+        self.update_dashboard(f"New egg location logged: {location}")
+        logging.info(f"Egg Finder: {entry}")

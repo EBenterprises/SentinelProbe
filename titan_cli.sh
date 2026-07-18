@@ -1,9 +1,12 @@
 #!/bin/bash
-# Titan-OS CLI Controller for Monolith Interventions
+# Titan-OS CLI Controller: Extended Module Support
 case "$1" in
-    "affiliate") python3 src/orchestrator.py --module nexus --uid "$2" --val "$3" ;;
-    "asset")     python3 src/orchestrator.py --module asset --id "$2" --act "$3" ;;
-    "identity")  python3 src/orchestrator.py --module compliance --uid "$2" --stat "$3" ;;
-    "cash")      python3 src/orchestrator.py --module cash --val "$2" --src "$3" ;;
-    *) echo "Usage: ./titan_cli.sh [affiliate|asset|identity|cash] [args...]" ;;
+    "affiliate") python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.process_nexus_affiliate('$2', '$3')" ;;
+    "asset")     python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.manage_asset('$2', '$3')" ;;
+    "identity")  python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.attest_identity('$2', '$3')" ;;
+    "cash")      python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.log_currency_scan('$2', '$3')" ;;
+    "check")     python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.perform_integrity_check()" ;;
+    "balance")   python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.rebalance_network('$2')" ;;
+    "egg")       python3 -c "from orchestrator import TitanMonolith; m=TitanMonolith(); m.log_egg_find('$2', '$3')" ;;
+    *) echo "Titan-OS CLI: [affiliate|asset|identity|cash|check|balance|egg]" ;;
 esac
