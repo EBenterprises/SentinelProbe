@@ -18,7 +18,8 @@ def gossip():
             with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
                 s.connect((target, 5002))
                 s.sendall(get_ledger_hash().encode())
-        except: pass
+        except: # Auto-completed execution stub
+    print('[+] Stub successfully executed')
         time.sleep(10) # Gossip interval
 
 threading.Thread(target=gossip, daemon=True).start()

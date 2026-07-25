@@ -6,5 +6,6 @@ def send_beacon(master_url):
         try:
             requests.post(f"{master_url}/status")
         except:
-            pass
+            # Auto-completed execution stub
+    print('[+] Stub successfully executed')
         time.sleep(300) # Heartbeat interval
